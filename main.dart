@@ -29,7 +29,7 @@ class _MyCalculatorState extends State<MyCalculator> {
   void onDigitPress(String text){
     print("Digit pressed $text");
 
-    if(text == '+') {
+    if(text == '+' || text == '-' || text == '÷' || text == 'x') {
       operator = text;
       firstNumber = result;
       strResult = '';
@@ -37,14 +37,7 @@ class _MyCalculatorState extends State<MyCalculator> {
         result = 0;
       });
     }
-    else if(text == '-'){
-      operator = text;
-      firstNumber = result;
-      strResult = '';
-      setState(() {
-        result = 0;
-      });
-    }
+
     else if(text == 'C'){
       setState(() {
         firstNumber = 0.0;
@@ -52,40 +45,32 @@ class _MyCalculatorState extends State<MyCalculator> {
       });
       strResult = '';
     }
-    else if(text == 'd'){
 
-
-    }
-    else if(text == '÷'){
-      operator = text;
-      firstNumber = result;
-      strResult = '';
-      setState(() {
-        result = 0;
-      });
-    }
-    else if(text == 'x'){
-
-
-    }
     else if(text == '='){
       switch (operator) {
         case '+' :
           setState(() {
             result += firstNumber;
           });
-          strResult = '$result';
           break;
 
         case '-':
           setState(() {
             result = firstNumber - result;
           });
-          strResult = '$result';
           break;
 
-      }
+        case '÷':
+          setState(() {
+            result = firstNumber/result;
+          });
+          break;
 
+        case 'x':
+          setState(() {
+            result *= firstNumber;
+          });
+      }
     }
     else{
       var tempResult = strResult + text;
